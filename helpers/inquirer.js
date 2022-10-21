@@ -25,7 +25,10 @@ const questions = [
 
 const inquirerMenu = async () => {
   console.clear();
-  console.log('🌞  Welcome to Climate App 🌦')
+
+  console.log('----------------------------------')
+  console.log('      Welcome to Climate App      ')
+  console.log('----------------------------------')
 
   const {option} = await inquirer.prompt(questions)
   return option
@@ -54,8 +57,36 @@ const readInput = async (message) => {
 
 }
 
+const listPlaces = async (places = []) => {
+
+  const choices = places.map((place, i) => ({
+    value: place.id,
+    name: `${`${i + 1}. `.green} ${place.name}`
+  }))
+
+  choices.unshift({
+    value: '0',
+    name: `${`0. `.green} Cancel`
+  })
+
+  const questions = [
+    {
+      type: 'list',
+      name: 'id',
+      message: 'Select a place',
+      choices
+    }
+  ]
+
+  const {id} = await inquirer.prompt(questions);
+
+  return id
+
+}
+
 module.exports = {
   inquirerMenu,
   pause,
   readInput,
+  listPlaces
 }

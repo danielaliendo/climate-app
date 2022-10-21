@@ -5,3 +5,5 @@
 .iws
  workspace.xml
  tasks.xml
+ /db
+ .env
